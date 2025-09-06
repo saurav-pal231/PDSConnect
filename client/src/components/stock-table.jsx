@@ -12,10 +12,14 @@ export default function StockTable({ shops }) {
   };
 
   const formatLastUpdate = (date) => {
+    if (!date) return 'N/A';
     const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    const dateObj = new Date(date);
+    const diffInHours = Math.floor((now.getTime() - dateObj.getTime()) / (1000 * 60 * 60));
     return `${diffInHours} hours ago`;
   };
+  
+  
 
   const getOverallStatus = (shop) => {
     const items = ['rice', 'wheat', 'sugar', 'kerosene'];

@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Landing from "@/pages/landing";
 import Login from "@/pages/login";
 import ShopDashboard from "@/pages/shop-dashboard";
+import Inventory from "./pages/shop-inventory";
 import BeneficiaryDashboard from "@/pages/beneficiary-dashboard";
 import AdminDashboard from "@/pages/admin-dashboard";
 import NotFound from "@/pages/not-found";
@@ -16,6 +17,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/login" component={Login} />
+      <Route path="/shop/inventory" component={Inventory} />
       <Route path="/shop" component={ShopDashboard} />
       <Route path="/beneficiary" component={BeneficiaryDashboard} />
       <Route path="/admin" component={AdminDashboard} />
