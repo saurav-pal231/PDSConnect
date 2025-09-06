@@ -150,7 +150,7 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
+    const user: User = { ...insertUser, id, shopId: insertUser.shopId || null };
     this.users.set(id, user);
     return user;
   }
@@ -165,7 +165,7 @@ export class MemStorage implements IStorage {
 
   async createShop(insertShop: InsertShop): Promise<Shop> {
     const id = randomUUID();
-    const shop: Shop = { ...insertShop, id };
+    const shop: Shop = { ...insertShop, id, contactNumber: insertShop.contactNumber || null };
     this.shops.set(id, shop);
     return shop;
   }

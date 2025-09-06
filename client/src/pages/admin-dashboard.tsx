@@ -24,32 +24,32 @@ export default function AdminDashboard() {
     queryKey: ['/api/admin/shops']
   });
 
-  const { data: statsData } = useQuery({
+  const { data: statsData = {} } = useQuery({
     queryKey: ['/api/admin/stats']
   });
 
   const stats = [
     {
       title: 'Total Shops',
-      value: statsData?.totalShops || 0,
+      value: (statsData as any)?.totalShops || 0,
       icon: Store,
       color: 'text-primary'
     },
     {
       title: 'Active Beneficiaries', 
-      value: statsData?.beneficiaries || 0,
+      value: (statsData as any)?.beneficiaries || 0,
       icon: Users,
       color: 'text-green-600'
     },
     {
       title: 'Low Stock Alerts',
-      value: statsData?.lowStockAlerts || 0,
+      value: (statsData as any)?.lowStockAlerts || 0,
       icon: AlertTriangle,
       color: 'text-red-600'
     },
     {
       title: 'Distribution Rate',
-      value: `${statsData?.distributionRate || 0}%`,
+      value: `${(statsData as any)?.distributionRate || 0}%`,
       icon: TrendingUp,
       color: 'text-green-600'
     }
@@ -140,7 +140,7 @@ export default function AdminDashboard() {
             </div>
 
             {/* All Shops Table */}
-            <StockTable shops={shopsData} />
+            <StockTable shops={Array.isArray(shopsData) ? shopsData : []} />
           </div>
         </main>
       </div>

@@ -30,7 +30,7 @@ export default function BeneficiaryDashboard() {
 
   const assignedShopId = user?.assignedShop?.id;
 
-  const { data: stockData } = useQuery({
+  const { data: stockData = [] } = useQuery({
     queryKey: ['/api/stock', assignedShopId],
     enabled: !!assignedShopId
   });
@@ -128,7 +128,7 @@ export default function BeneficiaryDashboard() {
             {/* Stock Availability Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {stockItems.map((item) => {
-                const stockItem = stockData?.find((s: any) => s.itemType === item.type);
+                const stockItem = Array.isArray(stockData) ? stockData.find((s: any) => s.itemType === item.type) : null;
                 const quantity = stockItem?.quantity || 0;
                 const status = getStockStatus(quantity, item.type);
                 const lastUpdated = stockItem ? formatLastUpdate(new Date(stockItem.lastUpdated)) : 'Never';

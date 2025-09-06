@@ -43,7 +43,7 @@ export default function ShopDashboard() {
     }
   });
 
-  const { data: stockData, isLoading } = useQuery({
+  const { data: stockData = [], isLoading } = useQuery({
     queryKey: ['/api/stock', user?.shopId],
     enabled: !!user?.shopId
   });
@@ -197,7 +197,7 @@ export default function ShopDashboard() {
             {/* Current Stock Display */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {stockItems.map((item) => {
-                const stockItem = stockData?.find((s: any) => s.itemType === item.type);
+                const stockItem = Array.isArray(stockData) ? stockData.find((s: any) => s.itemType === item.type) : null;
                 const quantity = stockItem?.quantity || 0;
                 const status = getStockStatus(quantity, item.type);
                 const lastUpdated = stockItem ? formatLastUpdate(new Date(stockItem.lastUpdated)) : 'Never';
